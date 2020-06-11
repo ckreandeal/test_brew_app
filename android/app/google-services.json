@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "47216338309",
+    "firebase_url": "https://ckrendel-brew-app-70a8e.firebaseio.com",
+    "project_id": "ckrendel-brew-app-70a8e",
+    "storage_bucket": "ckrendel-brew-app-70a8e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47216338309:android:1ce60cc295b0e1755d10ec",
+        "android_client_info": {
+          "package_name": "com.example.brew_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47216338309-rd87t9q5lplksgi11kmcc86gb31orq1d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.brew_app",
+            "certificate_hash": "33bddca4fd9f856b62948ae314c8f378f6365674"
+          }
+        },
+        {
+          "client_id": "47216338309-bmv4ii13rcji43pe7ifrq3qodqsdcgaf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6Y4lzOxqtiWw6vKwz4Xoq8Tv4tvo4S0w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47216338309-bmv4ii13rcji43pe7ifrq3qodqsdcgaf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
