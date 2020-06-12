@@ -1,5 +1,6 @@
 import 'package:brew_app/services/auth_service.dart';
 import 'package:brew_app/shared/constants.dart';
+import 'package:brew_app/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -14,13 +15,15 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
 
+  bool isLoading = false;
+
   String email = '';
   String password = '';
   String error = '';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoading ? Loading() : Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
@@ -73,10 +76,12 @@ class _SignInState extends State<SignIn> {
                   ),
                   onPressed: () async {
                     if (_formkey.currentState.validate()) {
+                      setState(() => isLoading = true);
                       dynamic result = await _auth.signInEmail(email, password);
                       if (result == null) {
                         setState(() {
                           error = 'Could not sign in';
+                          isLoading = false;
                         });
                       }
                     }

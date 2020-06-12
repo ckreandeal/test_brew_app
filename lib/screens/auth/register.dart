@@ -1,5 +1,6 @@
 import 'package:brew_app/services/auth_service.dart';
 import 'package:brew_app/shared/constants.dart';
+import 'package:brew_app/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -13,6 +14,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   String email = '';
   String password = '';
@@ -20,7 +22,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoading ? Loading() : Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
@@ -73,11 +75,13 @@ class _RegisterState extends State<Register> {
                   ),
                   onPressed: () async {
                     if (_formkey.currentState.validate()) {
+                      setState(() => isLoading = true);
                       dynamic result =
                           await _auth.registerEmail(email, password);
                       if (result == null) {
                         setState(() {
                           error = 'Please provide valid email';
+                          isLoading = false;
                         });
                       }
                     }
