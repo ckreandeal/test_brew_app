@@ -2,15 +2,15 @@ import 'package:brew_app/services/auth_service.dart';
 import 'package:brew_app/shared/constants.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
-  SignIn({this.toggleView});
+  Register({this.toggleView});
 
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
 
@@ -25,14 +25,14 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0,
-        title: Text('Sign In to Brew App'),
+        title: Text('Sign Up to Brew App'),
         actions: <Widget>[
           FlatButton.icon(
             onPressed: () {
               widget.toggleView();
             },
             icon: Icon(Icons.person),
-            label: Text('Sign Up'),
+            label: Text('Sign In'),
           ),
         ],
       ),
@@ -68,15 +68,16 @@ class _SignInState extends State<SignIn> {
               RaisedButton(
                   color: Colors.pink[400],
                   child: Text(
-                    'Sign In',
+                    'Register',
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () async {
                     if (_formkey.currentState.validate()) {
-                      dynamic result = await _auth.signInEmail(email, password);
+                      dynamic result =
+                          await _auth.registerEmail(email, password);
                       if (result == null) {
                         setState(() {
-                          error = 'Could not sign in';
+                          error = 'Please provide valid email';
                         });
                       }
                     }
