@@ -1,10 +1,8 @@
 class Brew {
-
   final String name;
-  final int strenght;
+  final int strength;
   final String sugar;
   final bool milk;
 
-  Brew ({this.name, this.milk, this.strenght, this.sugar});
-
+  Brew({this.name, this.strength, this.sugar, this.milk});
 }

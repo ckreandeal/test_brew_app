@@ -1,4 +1,5 @@
 import 'package:brew_app/models/brew.dart';
+import 'package:brew_app/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DBService {
@@ -10,11 +11,11 @@ class DBService {
       Firestore.instance.collection('brews');
 
   Future updateUserData(
-      String sugars, String name, int strenght, bool milk) async {
+      String sugar, String name, int strength, bool milk) async {
     return await brewCollection.document(uid).setData({
-      'sugars': sugars,
+      'sugar': sugar,
       'name': name,
-      'strenght': strenght,
+      'strength': strength,
       'milk': milk,
     });
   }
@@ -25,14 +26,30 @@ class DBService {
       return Brew(
         milk: doc.data['milk'] ?? true,
         name: doc.data['name'] ?? '',
-        strenght: doc.data['strenght'] ?? 0,
+        strength: doc.data['strength'] ?? 0,
         sugar: doc.data['sugar'] ?? '0',
       );
     }).toList();
   }
 
+  //userdata from snapshot
+  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return UserData(
+      uid: uid,
+      name: snapshot.data['name'],
+      sugar: snapshot.data['sugar'],
+      strength: snapshot.data['strength'],
+      milk: snapshot.data['milk'],
+    );
+  }
+
+
   // get brews streems
   Stream<List<Brew>> get brews {
     return brewCollection.snapshots().map(_brewListFromSnapshot);
+  }
+
+  Stream<UserData> get userData {
+    return brewCollection.document(uid).snapshots().map(_userDataFromSnapshot);
   }
 }
