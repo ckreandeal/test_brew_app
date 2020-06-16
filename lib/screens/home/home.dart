@@ -9,17 +9,18 @@ import 'package:brew_app/screens/home/brew_list.dart';
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
 
-  
   @override
   Widget build(BuildContext context) {
-    void _showSettingsPanel () {
-    showModalBottomSheet(context: context, builder: (context) {
-      return Container(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
-        child: SettingForm(),
-      );
-    });
-  }
+    void _showSettingsPanel() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+              child: SettingForm(),
+            );
+          });
+    }
 
     return StreamProvider<List<Brew>>.value(
       value: DBService().brews,
@@ -43,7 +44,14 @@ class Home extends StatelessWidget {
                 label: Text('settings')),
           ],
         ),
-        body: BrewList(),
+        body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/coffee_bg.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: BrewList()),
       ),
     );
   }
